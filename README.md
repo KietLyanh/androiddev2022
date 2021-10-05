@@ -12,5 +12,5 @@ Student Info
 
 * Name: Lý Anh Kiệt
 * ID: BI10-092
-* Group ID: 2
+* Group ID: 1
 
