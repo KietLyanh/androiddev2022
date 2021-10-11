@@ -8,15 +8,13 @@ import android.os.PersistableBundle;
 import android.util.Log;
 
 public class WeatherActivity extends AppCompatActivity {
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
-        ForecastFragment ff= ForecastFragment.newInstance("", "");
-        getSupportFragmentManager().beginTransaction().add(
-                R.id.container, ff).commit();
+        Log.i("here", "create");
 
+        ForecastFragment fragment = new ForecastFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
     }
 
     @Override
@@ -47,11 +45,5 @@ public class WeatherActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i("Weather", "onResume() called");
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        Log.i("Weather", "onCreate() called");
     }
 }
