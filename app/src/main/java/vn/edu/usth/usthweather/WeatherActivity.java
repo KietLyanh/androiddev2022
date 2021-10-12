@@ -1,10 +1,14 @@
 package vn.edu.usth.usthweather;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
 import android.util.Log;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -22,6 +26,25 @@ public class WeatherActivity extends AppCompatActivity {
         if (wf == null) {
             getSupportFragmentManager().beginTransaction().add(R.id.weatherFragment, wf, null).commit();
         }
+
+        TabLayout tabLayout = findViewById(R.id.tabs_layout);
+        ViewPager2 viewPager = findViewById(R.id.view_pager);
+
+        WeatherFragmentAdapter weatherFragmentAdapter = new WeatherFragmentAdapter(this);
+        viewPager.setAdapter(weatherFragmentAdapter);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("Home");
+                    break;
+                case 1:
+                    tab.setText("Another Home");
+                    break;
+                case 2:
+                    tab.setText("Home Again");
+                    break;
+            }
+        }).attach();
 
 
 
