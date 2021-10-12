@@ -1,20 +1,30 @@
 package vn.edu.usth.usthweather;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
+
 import android.util.Log;
 
 public class WeatherActivity extends AppCompatActivity {
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         Log.i("here", "create");
 
-        ForecastFragment fragment = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
+
+        ForecastFragment ff = new ForecastFragment();
+        WeatherFragment wf = new WeatherFragment();
+        if (ff == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.forecastFragment, ff, null).commit();
+        }
+        if (wf == null) {
+            getSupportFragmentManager().beginTransaction().add(R.id.weatherFragment, wf, null).commit();
+        }
+
+
+
     }
 
     @Override
