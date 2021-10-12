@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import android.media.MediaPlayer;
 
 public class WeatherActivity extends AppCompatActivity {
 
@@ -16,16 +17,16 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         Log.i("here", "create");
-
-
-        ForecastFragment ff = new ForecastFragment();
-        WeatherFragment wf = new WeatherFragment();
-        if (ff == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.forecastFragment, ff, null).commit();
-        }
-        if (wf == null) {
-            getSupportFragmentManager().beginTransaction().add(R.id.weatherFragment, wf, null).commit();
-        }
+//
+//
+//        ForecastFragment ff = new ForecastFragment();
+//        WeatherFragment wf = new WeatherFragment();
+//        if (ff == null) {
+//            getSupportFragmentManager().beginTransaction().add(R.id.forecastFragment, ff, null).commit();
+//        }
+//        if (wf == null) {
+//            getSupportFragmentManager().beginTransaction().add(R.id.weatherFragment, wf, null).commit();
+//        }
 
         TabLayout tabLayout = findViewById(R.id.tabs_layout);
         ViewPager2 viewPager = findViewById(R.id.view_pager);
@@ -46,7 +47,8 @@ public class WeatherActivity extends AppCompatActivity {
             }
         }).attach();
 
-
+        MediaPlayer mediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.intro);
+        mediaPlayer.start();
 
     }
 
