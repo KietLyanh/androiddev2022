@@ -1,7 +1,14 @@
 package vn.edu.usth.usthweather;
 
+import static vn.edu.usth.usthweather.R.id.action_settings;
+import static vn.edu.usth.usthweather.R.id.refresh;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import android.os.Bundle;
 
@@ -50,6 +57,32 @@ public class WeatherActivity extends AppCompatActivity {
         MediaPlayer mediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.intro);
         mediaPlayer.start();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case refresh:
+            {
+                Toast.makeText(getApplicationContext(), "Refreshing", Toast.LENGTH_LONG).show();
+                return true;
+            }
+
+            case action_settings:
+            {
+                Intent intent = new Intent(this, PrefActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override

@@ -18,4 +18,5 @@
     <string name="thursday">Thursday</string>
     <string name="sunday">Sunday</string>
     <string name="saturday">Saturday</string>
+    <string name="title_activity_pref">PrefActivity</string>
 </resources>
