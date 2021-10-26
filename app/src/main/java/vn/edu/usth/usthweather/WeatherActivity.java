@@ -10,6 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -67,15 +70,38 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        final Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                String content = msg.getData().getString("server_response");
+                Toast.makeText(getBaseContext(), content, Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1311);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putString("server_response", "here okay");
+
+                Message message = new Message();
+                message.setData(bundle);
+                handler.sendMessage(message);
+            }
+        });
+
         switch (item.getItemId()) {
-            case refresh:
-            {
-                Toast.makeText(getApplicationContext(), "Refreshing", Toast.LENGTH_LONG).show();
+            case refresh: {
                 return true;
             }
 
-            case action_settings:
-            {
+            case action_settings: {
                 Intent intent = new Intent(this, PrefActivity.class);
                 startActivity(intent);
                 return true;
@@ -83,35 +109,5 @@ public class WeatherActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i("Weather", "onStart() called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("Weather", "onStop() called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("Weather", "onDestroy() called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("Weather", "onPause() called");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("Weather", "onResume() called");
     }
 }
